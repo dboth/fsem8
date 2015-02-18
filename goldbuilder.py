@@ -24,7 +24,7 @@ with open(inputname) as fileobject:
 		linedat = line.strip().split("\t");
 		verb1 = linedat[1]
 		verb2 = linedat[2]
-		rel = linedat[3]
+		rel = linedat[3]+": "+linedat[4]
 		if (rel == "none"):
 			optline = [linedat + ["",""]]
 			continue
