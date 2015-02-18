@@ -34,7 +34,7 @@ with open(inputname) as fileobject:
 		i = 1
 		for synset in wn.synsets(verb1,pos=wn.VERB):
 			print str(i)+": "+synset.definition()
-			print "Example: "+synset.example()
+			print "Examples: "+synset.examples()
 			zuordnung[i] = synset.name()
 			i+=1
 		sensea = input("Correct Sense (Number): ")	
@@ -45,7 +45,7 @@ with open(inputname) as fileobject:
 		i = 1
 		for synset in wn.synsets(verb2,pos=wn.VERB):
 			print str(i)+": "+synset.definition()
-			print "Example: "+synset.example()
+			print "Examples: "+synset.examples()
 			zuordnung[i] = synset.name()
 			i+=1
 		sensea = input("Correct Sense (Number): ")	
