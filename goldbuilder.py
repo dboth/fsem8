@@ -15,6 +15,8 @@ def header(x,y,verb1,verb2):
 	print "Relation: "+verb1+" > "+verb2+" ("+rel+")"
 
 import os, json
+outputdata = os.getenv('USERPROFILE') or os.getenv('HOME');
+outputdata += "\\train.json";
 from nltk.corpus import wordnet as wn
 output = []
 x = sum(1 for line in open(inputname))
@@ -25,7 +27,7 @@ with open(inputname) as fileobject:
 		verb1 = linedat[1]
 		verb2 = linedat[2]
 		rel = linedat[3]+": "+linedat[4]
-		if (rel == "none"):
+		if (linedat[3] == "none"):
 			optline = [linedat + ["",""]]
 			continue
 		header(x,y,verb1,verb2)
@@ -54,6 +56,6 @@ with open(inputname) as fileobject:
 		output += optline
 		y+=1
 print "Thank you very much!"
-f = open(outputname,"w")
+f = open(outputdata,"w")
 f.write(json.dumps(output))
 f.close()
