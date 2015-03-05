@@ -23,7 +23,7 @@ class Wekabuilder:
 				handler = open(self.name+".arff","w")
 				handler.write(self.output)
 				handler.close()
-				return 0
+				return self
 			except:
 				raise IOError("File could not be written")
 		else:
