@@ -20,7 +20,7 @@ class Wekabuilder:
 	def saveArff(self):
 		if self.output != "":
 			try:
-				handler = open(name+".arff","w")
+				handler = open(self.name+".arff","w")
 				handler.write(self.output)
 				handler.close()
 				return 0
