@@ -1,4 +1,0 @@
-1	buy	own	ent	before	1938
-2	dream	sleep	tmp	during	276
-3	find	seek	pre	after	6349
-4	forget	know	pre	after	2592
