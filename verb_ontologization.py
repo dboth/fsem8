@@ -16,7 +16,7 @@ class OntologyWSD():
         self.gold = self.readFile(file_gold)
 
     def getInfo(self):
-        return [["cooc","NUMERIC"],["lesk","NUMERIC"],["relation",["ant","tmp","ent","pre"],["correct",["+","-"]]]
+        return [["cooc","NUMERIC"],["lesk","NUMERIC"],["relation",["ant","tmp","ent","pre"]],["correct",["+","-"]]]
 
     def readFile(self, filename):
         if filename.split(".")[1] == "json":
