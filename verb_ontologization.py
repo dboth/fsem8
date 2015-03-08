@@ -16,7 +16,7 @@ class OntologyWSD():
         self.gold = self.readFile(file_gold)
 
     def getInfo(self):
-        return [["cooc","NUMERIC"],["lesk","NUMERIC"],["correct",["+","-"]]]
+        return [["cooc","NUMERIC"],["lesk","NUMERIC"],["relation",["ant","tmp","ent","pre"],["correct",["+","-"]]]
 
     def readFile(self, filename):
         if filename.split(".")[1] == "json":
@@ -86,7 +86,7 @@ class OntologyWSD():
                     class_pred = "+"
                 else:
                     class_pred = "-"
-                out.update({i:[assoc_measures[i], self.getLesk(i[0], i[1]), class_pred]})
+                out.update({i:[assoc_measures[i], self.getLesk(i[0],self.gold[pair][3], i[1]), class_pred]})
         return out
 
 
