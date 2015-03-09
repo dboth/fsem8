@@ -11,7 +11,7 @@ class Wekabuilder:
 		
 	def processData(self):
 		#hihi list comprehension fun. wow being so readable wow.
-		self.output = "\n".join(["@RELATION "+self.name,""]+["@ATTRIBUTE " + rel[0]+" "+rel[1] if isinstance(rel[1],basestring) else "@ATTRIBUTE " + rel[0] + " {" + ",".join(["\""+str(x)+"\"" for x in rel[1]]) + "}" for rel in self.options]+["","","@DATA"]+[",".join(str(x) for x in line) for line in self.data.values()])
+		self.output = "\n".join(["@RELATION "+self.name,""]+["@ATTRIBUTE " + rel[0]+" "+rel[1] if isinstance(rel[1],str) else "@ATTRIBUTE " + rel[0] + " {" + ",".join(["\""+str(x)+"\"" for x in rel[1]]) + "}" for rel in self.options]+["","","@DATA"]+[",".join(str(x) for x in line) for line in self.data.values()])
 		return self
 		
 	def returnArff(self):
