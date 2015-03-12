@@ -1,3 +1,11 @@
+import verb_ontologization
+
+class Chooser():
+    def __init__(self, verb_a, verb_b):
+        self.va = verb_a
+        self.vb = verb_b
+
+    def calc
 0.13 + 
 [cooc] * -0.19 +
 [lesk] * -0.24 +

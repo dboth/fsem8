@@ -1,0 +1,19 @@
+Alle:
+Grenzen und Probleme spezifizieren
+Dokumentation Korrektur lesen
+
+
+Tonio:
+chooseSense.py
+Evaluation
+Documentation for Files
+
+Dombo:
+Readme
+Documentation ontonotes
+
+Svenja:
+Dokumentation des Projekts
+
+
+
