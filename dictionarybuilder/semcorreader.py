@@ -89,6 +89,8 @@ class SemcorDictionaryBuilder:
 					self.dictionary[key] += 1
 				else:
 					self.dictionary[key] = 1
+					
+					
 if __name__ == "__main__":
 	print("Initializing..")	
 	from nltk.corpus import semcor as s

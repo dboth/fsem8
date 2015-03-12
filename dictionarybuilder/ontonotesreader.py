@@ -11,6 +11,7 @@ from xml.dom import minidom
 from sys import stdout
 import json
 import time,os
+
 def addSentenceToDictionary(synsets, dictionary):
 		num_sets = len(synsets)
 		for x in range(num_sets): #last element does not have to be called, because it has no partner
@@ -21,6 +22,7 @@ def addSentenceToDictionary(synsets, dictionary):
 				else:
 					dictionary[key] = 1
 		return dictionary
+		
 dictionary = {}
 cd = cn.connect(user="root", password="root", host='127.0.0.1', database='ontonotes',buffered=True)
 cnx = cd.cursor()
@@ -28,6 +30,7 @@ query = "SELECT id FROM sentence WHERE lang_id = 'en'"
 cnx.execute(query)
 c = 1
 begintime = time.clock()
+
 for (id) in cnx:
 	now = time.clock()
 	vg = now-begintime
@@ -60,6 +63,7 @@ for (id) in cnx:
 	dictionary = addSentenceToDictionary(sorted(senselist),dictionary)					
 	cnx2.close()
 	c+=1
+	
 cnx.close()
 cd.close()
 
