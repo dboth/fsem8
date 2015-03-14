@@ -24,7 +24,7 @@ Requirements
 * Optional: py2exe (for providing a binary of the Gold Standard Annotator to users without python)
 * Optional: Inno Setup (for providing a binary of the Gold Standard Annotator to users without python)
 
-The three latter ones are only needed once to generate the verb cooccurence database files and are not needed in the runtime of the ontologizating algorithm.
+The third, fourth and fifth are only needed once to generate the verb cooccurence database files and are not needed in the runtime of the ontologizating algorithm.
 
 Structure and Usage of the Single Program Parts - Preprocessing
 ---------------------------------------------------------------
