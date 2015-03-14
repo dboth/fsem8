@@ -6,15 +6,13 @@ import json
 from nltk.corpus import wordnet as wn
 
 class OntologyWSD():
-    def __init__(self, file_train, file_occ, file_gold, file_test=""):
+    def __init__(self, file_occ, file_gold=""):
         try:
-            self.test = self.readFile(file_test)
+            self.gold = self.readFile(file_gold)
         except:
-            self.test= "NO TESTDATA GIVEN"
-        self.train = self.readFile(file_train)
+            pass
         self.occurances = self.readFile(file_occ)
-        self.gold = self.readFile(file_gold)
-
+        
     def getInfo(self):
         return [["cooc","NUMERIC"],["lesk","NUMERIC"],["relation",["ant","tmp","ent","pre"]],["correct",["+","-"]]]
 
@@ -91,7 +89,7 @@ class OntologyWSD():
 
 
 if __name__ == "__main__":
-    a = OntologyWSD("original_data/train_48.txt", "dictionarybuilder/all_verbs.json","goldstandard.json")
+    a = OntologyWSD("dictionarybuilder/all_verbs.json","goldstandard.json")
     print(a.processData())
 
 
