@@ -30,9 +30,8 @@ class Wekabuilder:
 			raise ValueError("Data was never processed. Use processData method first.")
 			
 if __name__ == "__main__":			
-	data = {("word1_sense1","word2_sense2"):[1,2,"+"],("word1_sense2","word2_sense3"):[1,3,"-"]}
-	options = [["cooc","NUMERIC"],["lesk","NUMERIC"],["gold",["+","-"]]]
-	name = "relation_ontologization"
-	builder = Wekabuilder(data,options,name)
-	builder.processData()
-	builder.saveArff()
+	from verb_ontologization import OntologyWSD
+	a = OntologyWSD("original_data/train_48.txt", "dictionarybuilder/all_verbs.json","goldstandard.json")
+	w = Wekabuilder(a.processData(),a.getInfo(),"ontolo")
+	w.processData()
+	w.saveArff()
