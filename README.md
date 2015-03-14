@@ -21,15 +21,17 @@ Requirements
 * Semcor Corpus installed in NLTK
 * MySQL Database
 * Ontonotes Corpus (installed into a MySQL Database)
-* Optional: py2exe (for providing a binary of the Gold Standard Annotator to users without python)
-* Optional: Inno Setup (for providing a binary of the Gold Standard Annotator to users without python)
+* *Optional:* py2exe (for providing a binary of the Gold Standard Annotator to users without python)
+* *Optional:* Inno Setup (for providing a binary of the Gold Standard Annotator to users without python)
 
 The three latter ones are only needed once to generate the verb cooccurence database files and are not needed in the runtime of the ontologizating algorithm.
 
 Structure and Usage of the Single Program Parts
 -----------------------------------------------
 **Gold Standard Annotator**
+
 *./goldbuilder/goldbuilder.py*
+
 Allows the annotation of a given set of related verbs with their wordnet sense by human annotators.
 Takes a file with one verb relation per line separated by tabs, like the given train and test files.
 The file to be loaded can be specified in the first lines of code.
