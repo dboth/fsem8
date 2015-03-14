@@ -30,8 +30,11 @@ Structure and Usage of the Single Program Parts
 -----------------------------------------------
 **Gold Standard Annotator**
 *./goldbuilder/goldbuilder.py*
+
 Allows the annotation of a given set of related verbs with their wordnet sense by human annotators.
+
 Takes a file with one verb relation per line separated by tabs, like the given train and test files.
+
 The file to be loaded can be specified in the first lines of code.
 Start the python script without any arguments. 
 The annotation is saved as a json file in the users home directory, formatted as the input file, but with the annotated wordnet senses as two more columns.
