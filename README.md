@@ -26,8 +26,8 @@ Requirements
 
 The three latter ones are only needed once to generate the verb cooccurence database files and are not needed in the runtime of the ontologizating algorithm.
 
-Structure and Usage of the Single Program Parts -- Preprocessing
-----------------------------------------------------------------
+Structure and Usage of the Single Program Parts - Preprocessing
+---------------------------------------------------------------
 **Gold Standard Annotator**  
 *./goldbuilder/goldbuilder.py*  
 Allows the annotation of a given set of related verbs with their wordnet sense by human annotators.  
@@ -64,6 +64,6 @@ Saves the cooccurence into a json dictionary, where the key is composed of the t
 *./dictionarybuilder/dictconcat.py*  
 Merges the two built json cooccurence dictionary into ones by adding the value of verb pairs that happen to exist in both corpora. Saves the resulting dictionary as a json dictionary.
 
-Structure and Usage of the Single Program Parts -- Main Algorithm
------------------------------------------------------------------
+Structure and Usage of the Single Program Parts - Main Algorithm
+----------------------------------------------------------------
 tbc
