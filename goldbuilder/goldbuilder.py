@@ -8,7 +8,7 @@ inputname = "train_48.txt"
 outputname = "train.json"
 def header(x,y,verb1,verb2):
 	os.system('cls' if os.name == 'nt' else 'clear')
-	print "Heidelberg University, Insitute of Computational Linguistics"
+	print "Heidelberg University, Institute of Computational Linguistics"
 	print "Dominik Both, Svenja Lohse, Tonio Weidler"
 	print "Gold Standard Annotator for Relation Ontologization" 
 	print str(int(round(y*100/x)))+"% (Relation "+str(y)+" of "+str(x)+")"
