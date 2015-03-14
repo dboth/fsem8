@@ -17,12 +17,7 @@ class OntologyWSD():
         return [["cooc","NUMERIC"],["lesk","NUMERIC"],["relation",["ant","tmp","ent","pre"]],["correct",["+","-"]]]
 
     def readFile(self, filename):
-        if filename.split(".")[1] == "json":
-            read = json.loads(open(filename).read())
-        else:
-            file = open(filename, "r")
-            read = [line for line in file.readlines()]
-            file.close
+        read = json.loads(open(filename).read())
         return read
 
     #METHODS TO CALC FEATURES
