@@ -3,10 +3,10 @@ Relationsontologisierungsalgorithmus (Relation Ontologizating Algorithm)
 
 Authors
 -------
-Dominik Both, Svenja Lohse and Tonio Weidler
-(both|lohse|weidler)@cl.uni-heidelberg.de
-Institut of Computational Linguistics
-Heidelberg University, Germany
+Dominik Both, Svenja Lohse and Tonio Weidler  
+(both|lohse|weidler)@cl.uni-heidelberg.de  
+Institut of Computational Linguistics  
+Heidelberg University, Germany  
 
 Goal
 ----
@@ -66,4 +66,22 @@ Merges the two built json cooccurence dictionary into ones by adding the value o
 
 Structure and Usage of the Single Program Parts - Main Algorithm
 ----------------------------------------------------------------
+**Verb Ontologization Main Class**  
+*./verb_ontologization.py*  
+tbc
+
+**Weka ARFF Builder**  
+*./weka.py*  
+tbc
+
+**ARFF Data Multiplicator**  
+*./arff_duplicator.py*  
+tbc
+
+**Verb Ontologization Sense Chooser**  
+*./choseSense.py*  
+tbc
+
+**Verb Ontologization Evaluator**  
+*./evaluate.py*  
 tbc

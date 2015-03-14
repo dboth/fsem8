@@ -4,7 +4,7 @@
 #Dominik Both
 #3125763
 
-inputname = "train_48.txt"
+inputname = "../original_data/train_48.txt"
 outputname = "train.json"
 def header(x,y,verb1,verb2):
 	os.system('cls' if os.name == 'nt' else 'clear')
