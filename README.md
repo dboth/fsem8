@@ -21,28 +21,13 @@ Requirements
 * Semcor Corpus installed in NLTK
 * MySQL Database
 * Ontonotes Corpus (installed into a MySQL Database)
-* *Optional:* py2exe (for providing a binary of the Gold Standard Annotator to users without python)
-* *Optional:* Inno Setup (for providing a binary of the Gold Standard Annotator to users without python)
+* Optional: py2exe (for providing a binary of the Gold Standard Annotator to users without python)
+* Optional: Inno Setup (for providing a binary of the Gold Standard Annotator to users without python)
 
 The three latter ones are only needed once to generate the verb cooccurence database files and are not needed in the runtime of the ontologizating algorithm.
 
 Structure and Usage of the Single Program Parts
 -----------------------------------------------
-<<<<<<< HEAD
-**Gold Standard Annotator**
-
-*./goldbuilder/goldbuilder.py*
-
-Allows the annotation of a given set of related verbs with their wordnet sense by human annotators.
-Takes a file with one verb relation per line separated by tabs, like the given train and test files.
-The file to be loaded can be specified in the first lines of code.
-Start the python script without any arguments. 
-The annotation is saved as a json file in the users home directory, formatted as the input file, but with the annotated wordnet senses as two more columns.
-The python script can optionally be compiled to a windows binary using the py2exe library and the setup.py script. 
-The resulting files can also be comprimated in to a setup.exe by using Inno Setup an the enclosed setup.iss.
-For more information regarding the build of a windows binary out of python and a installer see the documentation of py2exe and Inno Setup.
-
-=======
 **Gold Standard Annotator**  
 *./goldbuilder/goldbuilder.py*  
 Allows the annotation of a given set of related verbs with their wordnet sense by human annotators.  
@@ -54,9 +39,25 @@ The python script can optionally be compiled to a windows binary using the py2ex
 The resulting files can also be comprimated in to a setup.exe by using Inno Setup an the enclosed setup.iss.  
 For more information regarding the build of a windows binary out of python and a installer see the documentation of py2exe and Inno Setup.  
 
-**Gold Standard Annotator**  
-*./goldbuilder/goldbuilder.py*  
->>>>>>> origin/master
+**Gold Standard Generator**  
+*./goldbuilder/gold_gen.py*  
+Holds classes to generate one gold standard out of a variable number of human annotation holding json files.  
+Human annotations are loaded by instantiating the `Annotation` class.  
+The `Goldstandard` class takes a list of `Annotation` instances and holds a method to save the calculated  gold standard into a json file.
+See the comments in the file for more information regarding other methods of the named classes.
 
+**Semcor Verb Cooccurence Extractor**  
+*./dictionarybuilder/semcorreader.py*  
+Iterates through all sentences in the Semcor corpus and counts cooccurences of verb wordnet senses inside the sentence.  
+Saves the cooccurence into a json dictionary, where the key is composed of the two wordnet senses names separated by komma in alphabetical order.  
+See the comments in the file for more information regarding other methods of the Class.
+
+**Ontonotes Verb Cooccurence Extractor**  
+*./dictionarybuilder/ontonotesreader.py*  
+The corpus has to be loaded into a MySQL database. Login details have to be specified within the code.  
+Further alterations to the Ontonotes database have to be made, for the sentences in the database are not annotated with their language.  
+To only get english sentences firstly the language information has to be added by updating a new language_id column with data selected of the document table matching the id and document_id column.  
+Iterates through all english sentences in the Ontonotes corpus and counts cooccurences of verb wordnet senses inside the sentence.  
+Saves the cooccurence into a json dictionary, where the key is composed of the two wordnet senses names separated by komma in alphabetical order.  
 
 
