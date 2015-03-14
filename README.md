@@ -26,8 +26,8 @@ Requirements
 
 The three latter ones are only needed once to generate the verb cooccurence database files and are not needed in the runtime of the ontologizating algorithm.
 
-Structure and Usage of the Single Program Parts
------------------------------------------------
+Structure and Usage of the Single Program Parts -- Preprocessing
+----------------------------------------------------------------
 **Gold Standard Annotator**  
 *./goldbuilder/goldbuilder.py*  
 Allows the annotation of a given set of related verbs with their wordnet sense by human annotators.  
@@ -49,15 +49,21 @@ See the comments in the file for more information regarding other methods of the
 **Semcor Verb Cooccurence Extractor**  
 *./dictionarybuilder/semcorreader.py*  
 Iterates through all sentences in the Semcor corpus and counts cooccurences of verb wordnet senses inside the sentence.  
-Saves the cooccurence into a json dictionary, where the key is composed of the two wordnet senses names separated by komma in alphabetical order.  
+Saves the cooccurence into a json dictionary, where the key is composed of the two wordnet senses names separated by comma in alphabetical order.  
 See the comments in the file for more information regarding other methods of the Class.
 
 **Ontonotes Verb Cooccurence Extractor**  
 *./dictionarybuilder/ontonotesreader.py*  
 The corpus has to be loaded into a MySQL database. Login details have to be specified within the code.  
 Further alterations to the Ontonotes database have to be made, for the sentences in the database are not annotated with their language.  
-To only get english sentences firstly the language information has to be added by updating a new language_id column with data selected of the document table matching the id and document_id column.  
+To only get english sentences only, first the language information has to be added by updating a new lang_id column inside the sentence table with data selected out of the document table by matching the documents id and the sentences document_id column.  
 Iterates through all english sentences in the Ontonotes corpus and counts cooccurences of verb wordnet senses inside the sentence.  
-Saves the cooccurence into a json dictionary, where the key is composed of the two wordnet senses names separated by komma in alphabetical order.  
+Saves the cooccurence into a json dictionary, where the key is composed of the two wordnet senses names separated by comma in alphabetical order.  
 
+**Verb Cooccurence Extractor Merger**  
+*./dictionarybuilder/dictconcat.py*  
+Merges the two built json cooccurence dictionary into ones by adding the value of verb pairs that happen to exist in both corpora. Saves the resulting dictionary as a json dictionary.
 
+Structure and Usage of the Single Program Parts -- Main Algorithm
+-----------------------------------------------------------------
+tbc
