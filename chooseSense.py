@@ -1,4 +1,5 @@
 import verb_ontologization as v
+import json
 
 class Chooser():
     """ CLASS with methods for Files/Verb Pairs to chose correct senses by using data from verb_ontologization and goldstandard"""
@@ -24,8 +25,13 @@ class Chooser():
             print("PROCESSING "+pair[0]+" "+pair[1])
             out.append(self.calcVerbPair(pair[0],pair[1],pair[2]))
         return out
-
     
+    def writeIntoFile(self, filename, output_filename):
+        """ Writes calcFile() Information into a file to prevent repeated waiting times... """
+        f = open(output_filename, "w")
+        f.write(json.dumps(self.calcFile(filename)))
+        f.close()
+        
 if __name__ == "__main__":
     a = Chooser("dictionarybuilder/all_verbs.json")
-    print(a.calcFile("original_data/train_48.txt"))
+    a.writeIntoFile("original_data/train_48.txt", "train_data_calculated.json")

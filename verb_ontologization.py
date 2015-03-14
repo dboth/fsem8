@@ -1,5 +1,6 @@
 #verbontologization
 #WSD ALGORITHM
+#Both/Lohse/Weidler
 
 import numpy
 import json
@@ -7,6 +8,7 @@ from nltk.corpus import wordnet as wn
 
 class OntologyWSD():
     def __init__(self, file_occ, file_gold=""):
+        #gold standard File is optional to make feature functions accessable for other files (e.g. chooseSense.py) to just calculate features
         try:
             self.gold = self.readFile(file_gold)
         except:
@@ -14,15 +16,18 @@ class OntologyWSD():
         self.occurances = self.readFile(file_occ)
         
     def getInfo(self):
+        """ Returns all features and their possible states for WeKa implementation"""
         return [["cooc","NUMERIC"],["lesk","NUMERIC"],["relation",["ant","tmp","ent","pre"]],["correct",["+","-"]]]
 
+    #DATA PREPERATION METHODS
     def readFile(self, filename):
-        read = json.loads(open(filename).read())
-        return read
+        """ Reads json files (gold/ooc) """
+        return json.loads(open(filename, "r").read())
 
     #METHODS TO CALC FEATURES
     def findTroponymAssociation(self, combs):
-        ''' Takes a list of combined senses of two verbs and returns the overall occurance of all combinations of troponyms of the pairs. ''' 
+        """ Takes a list of combined senses of two verbs and returns the overall occurance of all combinations of troponyms of the pairs.
+        Function is meant to be used by getAssociationMeasures for further depth of analysis. """
         troponyms = {}
         for pair in combs:
             tuple_of_troponyms = ()
@@ -42,6 +47,8 @@ class OntologyWSD():
         return troponyms
     
     def getAssociationMeasures(self, verb_a, verb_b):
+        """ Takes two verbs and return a dictionary with the possible sense pairs for those two verbs as keys and their cooccurance divided by the occurances of
+        all possible pairs for the verbs that have one sense in common with the key pair. """
         verb_sense_combinations = [tuple(sorted((a.name(),b.name()))) for a in wn.synsets(verb_a, wn.VERB) for b in wn.synsets(verb_b, wn.VERB)]
         troponyms = self.findTroponymAssociation(verb_sense_combinations)
 
@@ -67,10 +74,13 @@ class OntologyWSD():
         return occ
 
     def getLesk(self, synset1, synset2):
+        """ Takes two SENSES (not verbs) and returns their Lesk, meaning the congruence of their descriptions in wordnet (natural positive number value increasing with common words in both definitions)."""
         return sum([1 if x in wn.synset(synset1).definition().split() else 0 for x in wn.synset(synset2).definition().split()])
 
     #FINALIZATION METHODS              
     def processData(self):
+        """ Only usable if GoldStandard File is provided! Returns a dictionary that contains all sense pairs for all verb pairs in the gold standard as keys and their feature vector. Decides if a sense is predicted correctly with those features
+        based on the gold standard annotation and provides this information as last feature respectively the classification label. """
         out={}
         for pair in self.gold:
             assoc_measures = self.getAssociationMeasures(self.gold[pair][1][0],self.gold[pair][1][1])
