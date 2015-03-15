@@ -30,12 +30,12 @@ das auch Tremper & Frank zur Annotation ihres oben erwähnten Data-Sets anwenden
 nach relationalen Angaben vollzogen. Die Feature-Gewichtungen, die Weka bestimmt, sind für die finale Auswahl 
 der richtigen Senses notwendig.
 
-Die Datenpunkte werden in die Klassen +/- unterteilt. Die + Klasse umfasst die laut Goldstandard korrekten Sensepaare, die - Klasse die
-für das Verbpaar inkorrekten Sensepaare.
+Die Datenpunkte werden in die Klassen +/- unterteilt. Die + Klasse umfasst die, laut Goldstandard, korrekten Sensepaare, die - Klasse 
+die für das Verbpaar inkorrekten Sensepaare.
 
 Mit diesen Methoden bzw. diesem Vorgehen kalkulieren wir (theoretisch) das wahrscheinlichste Sense-Paar zweier Verben in 
 ihrer Relation. Hierzu wird für ein Verbpaar der Featurevektor berechnet und mithilfe der Gewichtungen ein Wert berechnet. 
-Es wird das Sensepaar gewählt, das den maximalen Wert erreicht, weil es quasi am weitesten von der - Klasse entfernt ist, also
+Es wird das Sensepaar gewählt, das den maximalen Wert erreicht, weil es am weitesten von der - Klasse entfernt ist, also
 am wahrscheinlichsten für das Verbpaar.
 
 Evaluation
@@ -58,5 +58,5 @@ Korpusassoziationsmaße und Lesk alleine führen leider zu keinem sehr guten Erg
 Zusätzliche Maße (wordnet path distance, wordnet antonyms etc.) und das Hinzuziehen weiterer Korpora, somit einer dichteren 
 Verbkookurrenz, könnten in einem nächsten Schritt umgesetzt werden.
 
-Auch die Wahl von Clustering mit den Relationen als Klassen anstatt der Classification könnte ein besseres Ergebnis liefern.
+Auch die Wahl von Clustering mit den Relationen als Klassen anstatt der Klassifikation könnte ein besseres Ergebnis liefern.
 
