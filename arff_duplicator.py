@@ -5,7 +5,7 @@
 #lets see if this makes a difference
 
 output = []
-with open("ontolo.arff") as fileobject:
+with open("ontolo_new_trop.arff") as fileobject:
 		for line in fileobject:
 			test = line.split(",")
 			if len(test) == 4:
