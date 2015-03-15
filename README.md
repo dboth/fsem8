@@ -80,6 +80,7 @@ This class processes the data processed by the verb ontologization main class in
 The constructor takes a data dictionary of data points with the feature as a list and a options list containing information regarding the features.  
 See the comments in the file for more information regarding other methods of the Class.  
 Example:  
+
     data = {0:[1,2,"+"],1:[1,3,"-"]}  
     options = [["cooc","NUMERIC"],["lesk","NUMERIC"],["gold",["+","-"]]]  
     name = "relation_ontologization"  
