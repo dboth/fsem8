@@ -8,14 +8,16 @@ Mithilfe des Assoziationsmaßes zweier Korpora und Lesk-Berechnungen von Wordnet
 ausgewählt werden.
 Vorgehen
 --------
-Ein manuelles Auswählen der Senses bildet die Grundlage zur Berechnung des Goldstandards.
+Ein manuelles Auswählen der Senses bildet die Grundlage zur Berechnung des Goldstandards; die relationalen Senses stehen im 
+von Tremper und Frank erforschtem "Semantic Relations Data Set" zur Verfügung.
 Allerdings entstehen hierbei schon erste Komplikationen, da manche Verben in ihrer Relation ambige Bedeutungen besitzen 
 können (Bsp: „strenghten-weaken“, 1: makes strong or stronger – lessen the strength of; 2: gain strength – become weaker). 
 Wir entschieden trotzdem manuell mit unserem Weltwissen; durch diverse Wahrscheinlichkeitsberechnungen könnte eine 
 Disambiguierung stattfinden.
 
-Die Korpora SemCor und OntoNote dienen als Quelle, Kookurenz der Verbpaare und deren Senses zu zählen.
 Nun beginnt der eigentliche Wort-Sense-Disambiguierungsvorgang:
+Wie bei Tremper und Frank und in den 20.Vorlesungsfolien soll eine korpusbasierte WSD weiterhelfen.
+Die Korpora SemCor und OntoNote dienen als Quelle, Kookurenz der Verbpaare und deren Senses zu zählen
 ....
 Evaluation
 ----------
