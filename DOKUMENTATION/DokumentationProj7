@@ -21,17 +21,25 @@ Wie bei Tremper & Frank und in den 20.Vorlesungsfolien soll eine korpusbasierte 
 Die Korpora SemCor und OntoNote dienen zunächst als Quelle, Kookurenz der Verbpaare und deren Senses zu zählen.
 Nachdem alle möglichen Verb-Sense-Kombinationen(VSK) gebildet und deren Auftauchen im Korpus summiert wurden,
 werden die Kontextassoziationswahrscheinlichkeiten der VSK berechnet, orientiert an Jurafsky & Martin,
-und der Lesk-Algotrithmus wird initialisiert. 
+und der Lesk-Algorithmus wird initialisiert. 
 Zu diesen Werten fügen wir noch die Occurance der Troponyme der VSK hinzu, um eine größere Disambiguierung der 
 Verbbedeutungen zu gewährleisten.
 
 Mit diesen Ergebniswerten klassifiziert nun das Data-Mining-Programm Weka.
+Das aus "Grundlagen der Statistik" und "Machine Learning" bekannte Verfahren der Klassifikation, 
+das auch Tremper & Frank zur Annotation ihres oben erwähnten Data-Sets anwenden, wird von Weka automatisch 
+nach relationalen Angaben vollzogen. Die Feature-Werte sind für die finale Auswahl der richtigen Senses von Nutzen.
+
+Mit diesen Methoden bzw. diesem Vorgehen kalkulieren wir (theoretisch) das wahrscheinlichste Sense-Paar zweier Verben in 
+ihrer Relation.
 ....
 Evaluation
 ----------
 ....
 Erkenntnisse
 ------------
+Annahme: Sobald zwei Verben miteinander kookurrieren, besteht automatisch eine bestimmte Relation. Somit wäre die Art der Relation in unserem Projektverlauf unwichtig.
+
 Korpusassoziationsmaße und Lesk alleine führen leider zu keinem sehr guten Ergebnis des Algorithmus.
 Zusätzliche Maße (wordnet path distance, wordnet antonyms etc.) und das Hinzuziehen weiterer Korpora, somit einer größeren
 Verbkookurrenz, müssten im nächsten Schritt umgesetzt werden.
