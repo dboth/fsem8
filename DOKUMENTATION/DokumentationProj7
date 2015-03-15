@@ -1,0 +1,22 @@
+Dokumentation Projekt 7: Algorithmus zur Ontologisierung semantischer Relationen
+================================================================================
+Ziele
+-----
+Ziel unseres Projekts ist die Kreation eines Algorithmus, der Verbpaaren, die in Relation zueinander stehen, die richtigen Sensepaare zuteilt.
+Mithilfe des Assoziationsmaßes zweier Korpora und Lesk-Berechnungen von Wordnet-Glossen sollen die wahrscheinlichsten Senses ausgewählt werden.
+Vorgehen
+--------
+Ein manuelles Auswählen der Senses bildet die Grundlage zur Berechnung des Goldstandards.
+Allerdings entstehen hierbei schon erste Komplikationen, da manche Verben in ihrer Relation ambige Bedeutungen besitzen können (Bsp: „strenghten-weaken“, 1: makes strong or stronger – lessen the strength of; 2: gain strength – become weaker). Wir entschieden trotzdem manuell mit unserem Weltwissen; durch diverse Wahrscheinlichkeitsberechnungen könnte eine Disambiguierung stattfinden.
+
+Die Korpora SemCor und OntoNote dienen als Quelle, Kookurenz der Verbpaare und deren Senses zu zählen.
+Nun beginnt der eigentliche Wort-Sense-Disambiguierungsvorgang:
+....
+Evaluation
+----------
+....
+Erkenntnisse
+------------
+Korpusassoziationsmaße und Lesk alleine führen leider zu keinem sehr guten Ergebnis des Algorithmus.
+Zusätzliche Maße (wordnet path distance, wordnet antonyms etc.) und das Hinzuziehen weiterer Korpora, somit eine größere Verbkookurrenz, müssten im nächsten Schritt umgesetzt werden.
+....
