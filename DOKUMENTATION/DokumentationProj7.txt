@@ -58,5 +58,5 @@ Korpusassoziationsmaße und Lesk alleine führen leider zu keinem sehr guten Erg
 Zusätzliche Maße (wordnet path distance, wordnet antonyms etc.) und das Hinzuziehen weiterer Korpora, somit einer dichteren 
 Verbkookurrenz, könnten in einem nächsten Schritt umgesetzt werden.
 
-Auch die Wahl von Clustering mit den Relationen als Klassen statt der Classification könnte ein besseres Ergebnis liefern.
+Auch die Wahl von Clustering mit den Relationen als Klassen anstatt der Classification könnte ein besseres Ergebnis liefern.
 
