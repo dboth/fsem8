@@ -6,7 +6,7 @@ Ziele
 -----
 Ziel unseres Projekts ist die Kreation eines Algorithmus, der Verbpaaren, die in Relation zueinander stehen, 
 die richtigen Sensepaare zuteilt.
-Mithilfe des Assoziationsmaßes zweier Korpora und Lesk-Berechnungen von Wordnet-Glossen sollen die wahrscheinlichsten Senses 
+Mithilfe des Assoziationsmaßes über zwei Korpora und Lesk-Maß von Wordnet-Glossen sollen die wahrscheinlichsten Senses 
 ausgewählt werden.
 
 Vorgehen
@@ -15,22 +15,23 @@ Ein manuelles Auswählen der Senses bildet die Grundlage zur Berechnung des Gold
 von Tremper & Frank erforschten "Semantic Relations Data Set" zur Verfügung.
 
 Nun beginnt der eigentliche Wort-Sense-Disambiguierungsvorgang:
-Wie bei Tremper & Frank und in den 20.Vorlesungsfolien soll eine korpusbasierte WSD weiterhelfen.
+Wie bei Tremper & Frank und in den 20. Vorlesungsfolien soll eine korpusbasierte WSD weiterhelfen.
 Die Korpora SemCor und OntoNotes dienen zunächst als Quelle, um Kookurrenz der Verbpaare und deren Senses zu zählen.
 Nachdem alle möglichen Verb-Sense-Kombinationen(VSK) gebildet und deren Auftauchen im Korpus summiert wurden,
 werden die Kontextassoziations-Wahrscheinlichkeiten der VSK berechnet, orientiert an Jurafsky & Martin,
 und der Lesk-Algorithmus für das Vergleichen von Verb-Glossen wird initialisiert. 
-Zu diesen Werten fügen wir noch die Occurance der Troponyme der VSK hinzu, um eine größere Disambiguierung der 
-Verbbedeutungen zu erreichen zu können.
+Zu diesen Werten fügen wir noch die Kookurrenz der Troponyme der VSK hinzu, um mehr Daten in die Disambiguierung einzubeziehen.
+Dem liegt die Annahme zu Grunde, dass die Troponyme von Verben in der gleichen Relation zueinander stehen wie eben diese Verben.
 
 Mit diesen Ergebnissen klassifiziert nun das Data-Mining-Programm Weka unsere Relationen.
 Das aus "Grundlagen der Statistik" und "Machine Learning" bekannte Verfahren der Klassifikation, 
 das auch Tremper & Frank zur Annotation ihres oben erwähnten Data-Sets anwenden, wird von Weka automatisch 
-nach relationalen Angaben vollzogen. Die Feature-Werte sind für die finale Auswahl der richtigen Senses notwendig.
+nach relationalen Angaben vollzogen. Die Feature-Gewichtungen, die Weka bestimmt, sind für die finale Auswahl der richtigen Senses notwendig.
 
 Mit diesen Methoden bzw. diesem Vorgehen kalkulieren wir (theoretisch) das wahrscheinlichste Sense-Paar zweier Verben in 
-ihrer Relation.
-....
+ihrer Relation. Hierzu wird für ein Verbpaar der Featurevektor berechnet und mithilfe der Gewichtungen ein Wert berechnet. 
+Die Trainingsdaten wurden in die Klassen +/- unterteilt, wobei + die Klasse für die richtig annotierten
+
 Evaluation
 ----------
 ....
