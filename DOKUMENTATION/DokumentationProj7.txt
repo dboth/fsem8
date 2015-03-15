@@ -26,11 +26,16 @@ Dem liegt die Annahme zu Grunde, dass die Troponyme von Verben in der gleichen R
 Mit diesen Ergebnissen klassifiziert nun das Data-Mining-Programm Weka unsere Relationen.
 Das aus "Grundlagen der Statistik" und "Machine Learning" bekannte Verfahren der Klassifikation, 
 das auch Tremper & Frank zur Annotation ihres oben erwähnten Data-Sets anwenden, wird von Weka automatisch 
-nach relationalen Angaben vollzogen. Die Feature-Gewichtungen, die Weka bestimmt, sind für die finale Auswahl der richtigen Senses notwendig.
+nach relationalen Angaben vollzogen. Die Feature-Gewichtungen, die Weka bestimmt, sind für die finale Auswahl 
+der richtigen Senses notwendig.
+
+Die Datenpunkte werden in die Klassen +/- unterteilt. Die + Klasse umfasst die laut Goldstandard korrekten Sensepaare, die - Klasse die
+für das Verbpaar inkorrekten Sensepaare.
 
 Mit diesen Methoden bzw. diesem Vorgehen kalkulieren wir (theoretisch) das wahrscheinlichste Sense-Paar zweier Verben in 
 ihrer Relation. Hierzu wird für ein Verbpaar der Featurevektor berechnet und mithilfe der Gewichtungen ein Wert berechnet. 
-Die Trainingsdaten wurden in die Klassen +/- unterteilt, wobei + die Klasse für die richtig annotierten
+Es wird das Sensepaar gewählt, das den maximalen Wert erreicht, weil es quasi am weitesten von der - Klasse entfernt ist, also
+am wahrscheinlichsten für das Verbpaar.
 
 Evaluation
 ----------
