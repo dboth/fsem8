@@ -78,14 +78,14 @@ See the comments in the file for more information regarding other methods of the
 *./weka.py*  
 This class processes the data processed by the verb ontologization main class into a ARFF-file readable by WEKA.
 The constructor takes a data dictionary of data points with the feature as a list and a options list containing information regarding the features.  
-See the comments in the file for more information regarding other methods of the Class. 
+See the comments in the file for more information regarding other methods of the Class.  
 Example:  
-		data = {0:[1,2,"+"],1:[1,3,"-"]}  
-		options = [["cooc","NUMERIC"],["lesk","NUMERIC"],["gold",["+","-"]]]  
-		name = "relation_ontologization"  
-		builder = Wekabuilder(data,options,name)  
-		builder.processData()  
-		builder.saveArff()  
+    data = {0:[1,2,"+"],1:[1,3,"-"]}  
+    options = [["cooc","NUMERIC"],["lesk","NUMERIC"],["gold",["+","-"]]]  
+    name = "relation_ontologization"  
+    builder = Wekabuilder(data,options,name)  
+    builder.processData()  
+    builder.saveArff()  
 
 **ARFF Data Multiplicator**  
 *./arff_duplicator.py*  
