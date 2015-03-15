@@ -69,15 +69,28 @@ Structure and Usage of the Single Program Parts - Main Algorithm
 ----------------------------------------------------------------
 **Verb Ontologization Main Class**  
 *./verb_ontologization.py*  
-tbc
+This class is the calculation main class for the relation ontologization algorithm.  
+The constructor takes a cooccurence dictionary and optionally the gold standard file.  
+Calling the `processData` method returns a dictionary a list of the cooccurence measure and the lesk value for every possible sense pair.   
+See the comments in the file for more information regarding other methods of the Class.  
 
 **Weka ARFF Builder**  
 *./weka.py*  
-tbc
+This class processes the data processed by the verb ontologization main class into a ARFF-file readable by WEKA.
+The constructor takes a data dictionary of data points with the feature as a list and a options list containing information regarding the features.  
+See the comments in the file for more information regarding other methods of the Class. 
+Example:  
+		data = {0:[1,2,"+"],1:[1,3,"-"]}  
+		options = [["cooc","NUMERIC"],["lesk","NUMERIC"],["gold",["+","-"]]]  
+		name = "relation_ontologization"  
+		builder = Wekabuilder(data,options,name)  
+		builder.processData()  
+		builder.saveArff()  
 
 **ARFF Data Multiplicator**  
 *./arff_duplicator.py*  
-tbc
+This is a helper file, multiplying the positive datapoints by a given value to get an equal proportion. 
+Change the factor inside the file and start the script without any arguments.
 
 **Verb Ontologization Sense Chooser**  
 *./choseSense.py*  
