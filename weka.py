@@ -27,5 +27,5 @@ class Wekabuilder:
 if __name__ == "__main__":                      
         from verb_ontologization import OntologyWSD
         a = OntologyWSD("dictionarybuilder/all_verbs.json", "goldbuilder/goldstandard.json")
-        w = Wekabuilder(a.processData(),a.getInfo(),"ontolo")
+        w = Wekabuilder(a.processData(),a.getInfo(),"ontolo_new_trop")
         w.saveArff()

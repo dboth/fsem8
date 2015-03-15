@@ -13,6 +13,7 @@ class OntologyWSD():
             self.gold = self.readFile(file_gold)
         except:
             pass
+        
         self.occurances = self.readFile(file_occ)
         
     def getInfo(self):
@@ -28,22 +29,37 @@ class OntologyWSD():
     def findTroponymAssociation(self, combs):
         """ Takes a list of combined senses of two verbs and returns the overall occurance of all combinations of troponyms of the pairs.
         Function is meant to be used by getAssociationMeasures for further depth of analysis. """
+        print("ENTERING Troponym Calculation")
         troponyms = {}
-        for pair in combs:
+        for orig_pair in combs:
             tuple_of_troponyms = ()
-            for sense in pair:
+            for sense in orig_pair:
                 tuple_of_troponyms += (wn.synset(sense).hyponyms(),)
-            troponyms.update({pair: tuple_of_troponyms})
+            troponyms.update({orig_pair: tuple_of_troponyms})    
         
         for pair in troponyms:
-            troponym_combinations = [(a,b) for a in troponyms[pair][0] for b in troponyms[pair][1]]
-            occ_trop = 0
-            for trop_pair in troponym_combinations:
-                pair_string = pair[0]+","+pair[1]
-                if pair_string in self.occurances:
-                    occ_trop += self.occurances[pair_string]
-            troponyms[pair] = occ_trop
+            troponym_combinations = [tuple(sorted((a.name(),b.name()))) for a in troponyms[pair][0] for b in troponyms[pair][1]]
+            if troponym_combinations != []:
+                occurances_extract = {}
+                for el in self.occurances:
+                    element = tuple(sorted(el.split(",")))
+                    if element in troponym_combinations:
+                        occurances_extract.update({element: self.occurances[el]})
             
+            occ_trop = 0
+            occ_of_other_combs = 0
+            for trop_pair in troponym_combinations:
+                if trop_pair in occurances_extract:
+                    occ_trop += occurances_extract[trop_pair]
+                    for el in occurances_extract: #divident_calc
+                        if trop_pair[0] in el or trop_pair[1] in el:
+                            occ_of_other_combs += occurances_extract[el]
+            
+            troponyms[pair] = [occ_trop, occ_of_other_combs]
+            if troponyms[pair] != [0,0]:
+                print(troponyms[pair])
+            
+        print("FINISHED Troponym Calculation")
         return troponyms
     
     def getAssociationMeasures(self, verb_a, verb_b):
@@ -67,10 +83,12 @@ class OntologyWSD():
                 for el in occurances_extract:
                     if pair[0] in el or pair[1] in el:
                         occ_of_other_combs += occurances_extract[el]
-                occ.update({pair: ((occurances_extract[pair] + troponyms[pair])/occ_of_other_combs)})
+                occ.update({pair: ((occurances_extract[pair] + troponyms[pair][0])/(occ_of_other_combs+troponyms[pair][1]))})
             else:
-                occ.update({pair: 0})
-
+                try:
+                    occ.update({pair: (troponyms[pair][0]/troponyms[pair][1])})
+                except:
+                    occ.update({pair: troponyms[pair][0]})
         return occ
 
     def getLesk(self, synset1, synset2):
@@ -83,6 +101,7 @@ class OntologyWSD():
         based on the gold standard annotation and provides this information as last feature respectively the classification label. """
         out={}
         for pair in self.gold:
+            print("---------\nPROCESSING: "+str(self.gold[pair][1]))
             assoc_measures = self.getAssociationMeasures(self.gold[pair][1][0],self.gold[pair][1][1])
             for i in assoc_measures:
                 if i == tuple(sorted(self.gold[pair][0])):
@@ -94,7 +113,7 @@ class OntologyWSD():
 
 
 if __name__ == "__main__":
-    a = OntologyWSD("dictionarybuilder/all_verbs.json","goldstandard.json")
+    a = OntologyWSD("dictionarybuilder/all_verbs.json","goldbuilder/goldstandard.json")
     print(a.processData())
 
 
