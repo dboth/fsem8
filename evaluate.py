@@ -25,7 +25,6 @@ class Evaluation():
                         amount_predictions += 1
                     else:
                         amount_predictions += 1
-        print(amount_predictions)
         return correct/amount_predictions*100
     
     def calcFScore(self):
