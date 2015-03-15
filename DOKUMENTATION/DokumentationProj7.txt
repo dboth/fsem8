@@ -6,7 +6,7 @@ Ziele
 -----
 Ziel unseres Projekts ist die Kreation eines Algorithmus, der Verbpaaren, die in Relation zueinander stehen, 
 die richtigen Sensepaare zuteilt.
-Mithilfe des Assoziationsmaßes zweier Korpora und Lesk-Berechnungen von Wordnet-Glossen sollen die wahrscheinlichsten Senses 
+Mithilfe des Assoziationsmaßes über zwei Korpora und Lesk-Maß von Wordnet-Glossen sollen die wahrscheinlichsten Senses 
 ausgewählt werden.
 
 Vorgehen
@@ -15,37 +15,48 @@ Ein manuelles Auswählen der Senses bildet die Grundlage zur Berechnung des Gold
 von Tremper & Frank erforschten "Semantic Relations Data Set" zur Verfügung.
 
 Nun beginnt der eigentliche Wort-Sense-Disambiguierungsvorgang:
-Wie bei Tremper & Frank und in den 20.Vorlesungsfolien soll eine korpusbasierte WSD weiterhelfen.
+Wie bei Tremper & Frank und in den 20. Vorlesungsfolien soll eine korpusbasierte WSD weiterhelfen.
 Die Korpora SemCor und OntoNotes dienen zunächst als Quelle, um Kookurrenz der Verbpaare und deren Senses zu zählen.
 Nachdem alle möglichen Verb-Sense-Kombinationen(VSK) gebildet und deren Auftauchen im Korpus summiert wurden,
 werden die Kontextassoziations-Wahrscheinlichkeiten der VSK berechnet, orientiert an Jurafsky & Martin,
 und der Lesk-Algorithmus für das Vergleichen von Verb-Glossen wird initialisiert. 
-Zu diesen Werten fügen wir noch die Occurance der Troponyme der VSK hinzu, um eine größere Disambiguierung der 
-Verbbedeutungen zu erreichen zu können.
+Zu diesen Werten fügen wir noch die Kookurrenz der Troponyme der VSK hinzu, um mehr Daten in die Disambiguierung einzubeziehen.
+Dem liegt die Annahme zu Grunde, dass die Troponyme von Verben in der gleichen Relation zueinander stehen wie eben diese Verben.
 
-Mit diesen Ergebnissen klassifiziert nun das Data-Mining-Programm Weka unsere Relationen.
+Mit diesen Ergebnissen klassifiziert nun das Data-Mining-Programm Weka unsere Sensepaare mithilfe des 
+Simple Logistic Algorithm.
 Das aus "Grundlagen der Statistik" und "Machine Learning" bekannte Verfahren der Klassifikation, 
 das auch Tremper & Frank zur Annotation ihres oben erwähnten Data-Sets anwenden, wird von Weka automatisch 
-nach relationalen Angaben vollzogen. Die Feature-Werte sind für die finale Auswahl der richtigen Senses notwendig.
+nach relationalen Angaben vollzogen. Die Feature-Gewichtungen, die Weka bestimmt, sind für die finale Auswahl 
+der richtigen Senses notwendig.
+
+Die Datenpunkte werden in die Klassen +/- unterteilt. Die + Klasse umfasst die laut Goldstandard korrekten Sensepaare, die - Klasse die
+für das Verbpaar inkorrekten Sensepaare.
 
 Mit diesen Methoden bzw. diesem Vorgehen kalkulieren wir (theoretisch) das wahrscheinlichste Sense-Paar zweier Verben in 
-ihrer Relation.
-....
+ihrer Relation. Hierzu wird für ein Verbpaar der Featurevektor berechnet und mithilfe der Gewichtungen ein Wert berechnet. 
+Es wird das Sensepaar gewählt, das den maximalen Wert erreicht, weil es quasi am weitesten von der - Klasse entfernt ist, also
+am wahrscheinlichsten für das Verbpaar.
+
 Evaluation
 ----------
 ....
 Erkenntnisse
 ------------
-Annahme: Sobald zwei Verben miteinander kookurrieren, besteht automatisch eine bestimmte Relation. 
-Somit wäre die Art der Relation in unserem Projektverlauf unwichtig.
+Annahmen: 
+1. Zwei Verb(-senses) die in einer Relation zueinander stehen, haben eine höhere Kookurrenz und einen höheren Lesk-Wert als
+Verb(-senses) ohne Kookurrenz.
+2. Die Art der Relation ist irrelevant in Bezug auf die Kookurrenz.
 
 Erste Komplikationen entstanden schon bei der manuellen Auswahl der Senses für den Goldstandard, 
-da manche Verben in ihrer Relation ambige Bedeutungen besitzen können 
+da manche Verben in ihrer Relation ambige Bedeutungen besitzen können. 
 (Bsp: „strenghten-weaken“, 1: makes strong or stronger – lessen the strength of; 2: gain strength – become weaker). 
 Wir entschieden trotzdem manuell mit unserem Weltwissen; durch diverse Wahrscheinlichkeitsberechnungen könnte eine 
 Disambiguierung stattfinden.
 
 Korpusassoziationsmaße und Lesk alleine führen leider zu keinem sehr guten Ergebnis des Algorithmus.
-Zusätzliche Maße (wordnet path distance, wordnet antonyms etc.) und das Hinzuziehen weiterer Korpora, somit einer größeren
-Verbkookurrenz, müssten im nächsten Schritt umgesetzt werden.
-....
+Zusätzliche Maße (wordnet path distance, wordnet antonyms etc.) und das Hinzuziehen weiterer Korpora, somit einer dichteren 
+Verbkookurrenz, könnten in einem nächsten Schritt umgesetzt werden.
+
+Auch die Wahl von Clustering mit den Relationen als Klassen anstatt der Classification könnte ein besseres Ergebnis liefern.
+
