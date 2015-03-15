@@ -21,17 +21,14 @@ class Evaluation():
             for prediction in self.chosen_pairs:
                 if [self.gold[true_label][1],self.gold[true_label][3]] == [[prediction[0], prediction[1]], prediction[2]]:
                     if sorted(self.gold[true_label][0]) == sorted(list(prediction[3])):
+                        print(self.gold[true_label][0])
                         correct += 1
                         amount_predictions += 1
                     else:
                         amount_predictions += 1
-        print(amount_predictions)
         return correct/amount_predictions*100
-    
-    def calcFScore(self):
-        pass
     
 
 if __name__ == "__main__":
-    e = Evaluation("goldstandard.json", "train_data_calculated.json")
+    e = Evaluation("goldbuilder/goldstandard.json", "train_data_calculated.json")
     print(e.calcCongruence())
