@@ -94,8 +94,14 @@ Change the factor inside the file and start the script without any arguments.
 
 **Verb Ontologization Sense Chooser**  
 *./choseSense.py*  
-tbc
+This class calculates the most probable sense pair for given test data using the calculations in the verb ontologization main class.  
+The constructor takes the cooccurence file for the verb ontologization class.  
+By calling the `writeIntoFile` method the algorithm writes the results for the given test data file into a json file, which can be evaluated to the goldstandard with the following evaluation class.  
+See the comments in the file for more information regarding other methods of the Class. 
 
 **Verb Ontologization Evaluator**  
 *./evaluate.py*  
-tbc
+Evaluates the calculations of the sense chooser on a given gold standard.  
+The constructor takes the path to the named files.  
+By using the `calcCongruence` method the evaluator prints the accuracy.
+See the comments in the file for more information regarding other methods of the Class. 
