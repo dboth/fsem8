@@ -6,18 +6,26 @@ Ziel unseres Projekts ist die Kreation eines Algorithmus, der Verbpaaren, die in
 die richtigen Sensepaare zuteilt.
 Mithilfe des Assoziationsmaßes zweier Korpora und Lesk-Berechnungen von Wordnet-Glossen sollen die wahrscheinlichsten Senses 
 ausgewählt werden.
+
 Vorgehen
 --------
 Ein manuelles Auswählen der Senses bildet die Grundlage zur Berechnung des Goldstandards; die relationalen Senses stehen im 
-von Tremper und Frank erforschtem "Semantic Relations Data Set" zur Verfügung.
+von Tremper und Frank erforschten "Semantic Relations Data Set" zur Verfügung.
 Allerdings entstehen hierbei schon erste Komplikationen, da manche Verben in ihrer Relation ambige Bedeutungen besitzen 
 können (Bsp: „strenghten-weaken“, 1: makes strong or stronger – lessen the strength of; 2: gain strength – become weaker). 
 Wir entschieden trotzdem manuell mit unserem Weltwissen; durch diverse Wahrscheinlichkeitsberechnungen könnte eine 
 Disambiguierung stattfinden.
 
 Nun beginnt der eigentliche Wort-Sense-Disambiguierungsvorgang:
-Wie bei Tremper und Frank und in den 20.Vorlesungsfolien soll eine korpusbasierte WSD weiterhelfen.
-Die Korpora SemCor und OntoNote dienen als Quelle, Kookurenz der Verbpaare und deren Senses zu zählen
+Wie bei Tremper & Frank und in den 20.Vorlesungsfolien soll eine korpusbasierte WSD weiterhelfen.
+Die Korpora SemCor und OntoNote dienen zunächst als Quelle, Kookurenz der Verbpaare und deren Senses zu zählen.
+Nachdem alle möglichen Verb-Sense-Kombinationen(VSK) gebildet und deren Auftauchen im Korpus summiert wurden,
+werden die Kontextassoziationswahrscheinlichkeiten der VSK berechnet, orientiert an Jurafsky & Martin,
+und der Lesk-Algotrithmus wird initialisiert. 
+Zu diesen Werten fügen wir noch die Occurance der Troponyme der VSK hinzu, um eine größere Disambiguierung der 
+Verbbedeutungen zu gewährleisten.
+
+Mit diesen Ergebniswerten klassifiziert nun das Data-Mining-Programm Weka.
 ....
 Evaluation
 ----------
@@ -25,6 +33,6 @@ Evaluation
 Erkenntnisse
 ------------
 Korpusassoziationsmaße und Lesk alleine führen leider zu keinem sehr guten Ergebnis des Algorithmus.
-Zusätzliche Maße (wordnet path distance, wordnet antonyms etc.) und das Hinzuziehen weiterer Korpora, somit eine größere
+Zusätzliche Maße (wordnet path distance, wordnet antonyms etc.) und das Hinzuziehen weiterer Korpora, somit einer größeren
 Verbkookurrenz, müssten im nächsten Schritt umgesetzt werden.
 ....
