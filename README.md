@@ -8,10 +8,10 @@ Dominik Both, Svenja Lohse and Tonio Weidler
 Institute of Computational Linguistics  
 Heidelberg University, Germany  
 
-Goal
+Outline
 ----
-Goal of this project was to conceptionalize an algorithm that takes a given set of semantically related verbs and computes the most propable wordnet sense pair.
-In the first step the algorithm takes the cooccurence measure of the senses in two corpora and the lesk measure of the wordnet sense glosses as indicators for sense propability.
+Goal of this project was to conceptionalize an algorithm that takes a given set of semantically related verbs and computes the most probable wordnet sense pair.
+In the first step the algorithm takes the cooccurence measure of the senses in two corpora and the lesk measure of the wordnet sense glosses as indicators for sense probability.
 It turned out, that this is not enough to get a satisfying ontologization algorithm, which reflects in the evaluation of the current algorithm.
 Further steps to be made could be taking advantage of other measurements (wordnet path distance, wordnet antonyms etc.) and a larger set of verb cooccurence data by evaluating more corporas.
 
