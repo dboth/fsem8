@@ -11,10 +11,6 @@ Vorgehen
 --------
 Ein manuelles Auswählen der Senses bildet die Grundlage zur Berechnung des Goldstandards; die relationalen Senses stehen im 
 von Tremper und Frank erforschten "Semantic Relations Data Set" zur Verfügung.
-Allerdings entstehen hierbei schon erste Komplikationen, da manche Verben in ihrer Relation ambige Bedeutungen besitzen 
-können (Bsp: „strenghten-weaken“, 1: makes strong or stronger – lessen the strength of; 2: gain strength – become weaker). 
-Wir entschieden trotzdem manuell mit unserem Weltwissen; durch diverse Wahrscheinlichkeitsberechnungen könnte eine 
-Disambiguierung stattfinden.
 
 Nun beginnt der eigentliche Wort-Sense-Disambiguierungsvorgang:
 Wie bei Tremper & Frank und in den 20.Vorlesungsfolien soll eine korpusbasierte WSD weiterhelfen.
@@ -38,7 +34,14 @@ Evaluation
 ....
 Erkenntnisse
 ------------
-Annahme: Sobald zwei Verben miteinander kookurrieren, besteht automatisch eine bestimmte Relation. Somit wäre die Art der Relation in unserem Projektverlauf unwichtig.
+Annahme: Sobald zwei Verben miteinander kookurrieren, besteht automatisch eine bestimmte Relation. 
+Somit wäre die Art der Relation in unserem Projektverlauf unwichtig.
+
+Erste Komplikationen entstanden schon bei der manuellen Auswahl der Senses für den Goldstandard, 
+da manche Verben in ihrer Relation ambige Bedeutungen besitzen können 
+(Bsp: „strenghten-weaken“, 1: makes strong or stronger – lessen the strength of; 2: gain strength – become weaker). 
+Wir entschieden trotzdem manuell mit unserem Weltwissen; durch diverse Wahrscheinlichkeitsberechnungen könnte eine 
+Disambiguierung stattfinden.
 
 Korpusassoziationsmaße und Lesk alleine führen leider zu keinem sehr guten Ergebnis des Algorithmus.
 Zusätzliche Maße (wordnet path distance, wordnet antonyms etc.) und das Hinzuziehen weiterer Korpora, somit einer größeren
