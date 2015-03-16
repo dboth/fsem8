@@ -2,6 +2,7 @@ Dokumentation Projekt 7: Algorithmus zur Ontologisierung semantischer Relationen
 Dominik Both, Svenja Lohse, Tonio Weidler
 "Formale Semantik", Anette Frank, WS 14/15
 ================================================================================
+
 Ziele
 -----
 Ziel unseres Projekts ist die Kreation eines Algorithmus, der Verbpaaren, die in Relation zueinander stehen, 
@@ -41,6 +42,8 @@ Mit diesen Methoden bzw. diesem Vorgehen kalkulieren wir (theoretisch) das wahrs
 ihrer Relation. Hierzu wird für ein Verbpaar der Featurevektor berechnet und mithilfe der Gewichtungen ein Wert berechnet. 
 Es wird das Sensepaar gewählt, das den maximalen Wert erreicht, weil es am weitesten von der - Klasse entfernt ist, also
 am wahrscheinlichsten für das Verbpaar.
+
+Die Funktionsweisen der einzelnen Methoden und Klassen finden sich im Readme.
 
 Evaluation
 ----------
