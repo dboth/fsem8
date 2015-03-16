@@ -73,4 +73,4 @@ Verbkookurrenz, könnten in einem nächsten Schritt umgesetzt werden.
 Auch die Wahl von Clustering mit den Relationen als Klassen anstatt der Klassifikation könnte ein besseres Ergebnis liefern.
 Im aktuellen Verfahren wählt Weka Gewichtungen so, dass hinsichtlich der richtigen +/- Labelung optimiert wurde. Da aber mehrere
 Sensepaare das + Label erhalten können, wurde das Paar mit dem höchsten Wert gewählt. Hiernach wurde die Gewichtung jedoch nicht optimiert.
-Andere Optimierungs- und Klassifizierungs- bzw. Clusteringverfahren könnten bessere Ergebnisse erzielen. 
+Eventuell können bessere Ergebnisse erzielt werden, wenn das Optimierungsverfahren besser gewählt wird. 
