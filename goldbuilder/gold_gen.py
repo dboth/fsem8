@@ -16,12 +16,14 @@ class Annotation():
 
     #METHODS
     def readFile(self, filename):
+        """ Reads Files """
         file = open(filename, "r")
         out = file.read()
         file.close()
         return out
     def createDictOfCategories(self):
-        ''' <cat_number>: [verb1, verb2, relation, relation_specification, available_contexts, v1_sense, v2_sense] '''
+        """ Created a Dictionary out of the File
+        <cat_number>: [verb1, verb2, relation, relation_specification, available_contexts, v1_sense, v2_sense] """
         categories = {}
         for cat in self.file:
             single_cat = cat[1:-1].split('", "')
@@ -35,9 +37,11 @@ class Goldstandard():
         self.average_confidence = self.calcAverageConfidence()
 
     def readFile(self, filename):
+        """" reads json File """
         return json.loads(open(filename).read())
         
     def calcGold(self):
+        """ Calculates the gold standard by choosing the most common tuple between all annotators. Provides the confidence of this choice as well """
         all_tupels = {}
         for ann in self.annotations:
             for cat in ann:
@@ -55,20 +59,25 @@ class Goldstandard():
         return gold
     
     def calcAverageConfidence(self):
+        """ Returns the average confidence of the goldstandard """
         additive_conf = 0
         for cat in self.gold:
             additive_conf += self.gold[cat][2]
         return additive_conf/len(self.gold)
     
     def getProblematicDecisions(self):
+        """ returns all Decisions that were problematic (below 0.75 Confidence) """
         return sorted([int(i) for i in self.gold if self.gold[i][1] < 0.75])
 
     def fixGold(self, filename):
+        """ takes an annotation File that contains some of the categories/pairs to overwrite the goldstandard in those cases. Meant to manually
+        improve the goldstandard in cases of problematic decisions """
         fixed = self.readFile(filename)
         for i in fixed:
             self.gold[i[0]][0]=i[-2:]
         
     def writeIntoFile(self):
+        """ Writes the goldstandard into a file """
         f = open("goldstandard.json", "w")
         f.write(json.dumps(self.gold))
         f.close()

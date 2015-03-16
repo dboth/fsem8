@@ -34,4 +34,4 @@ class Chooser():
         
 if __name__ == "__main__":
     a = Chooser("dictionarybuilder/all_verbs.json")
-    a.writeIntoFile("original_data/train_48.txt", "train_data_calculated.json")
+    a.writeIntoFile("original_data/train_48.txt", "train_data_test.json")
