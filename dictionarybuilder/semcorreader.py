@@ -2,18 +2,27 @@
 from nltk.tree import Tree
 from sys import stdout
 import json
+
+'''
+Cooccurence counter class for the semcor corpus
+Requires nltk with semcor
+returns cooccurence dictionary of all verbs over all sentences
+'''
 class SemcorDictionaryBuilder:
 	semcor = []
 	dictionary = {}
-
+	
+	#init with empty corpus
 	def __init__(self, semcor=[]):
 		self.semcor = semcor
 		print("Ready.")
 	
+	#setter for the corpus, where each sentence is an element in a list
 	def setCorpus(self, dict):
 		self.semcor = dict
 		print("Ready.")
 	
+	#iterates through the dictionary and processes the sentence
 	def buildDictionary(self):
 		num = 1
 		stdout.write("\rPreparing...")
@@ -24,7 +33,8 @@ class SemcorDictionaryBuilder:
 			self.addSentenceToDictionary(self.getOccuringSynsets(i))
 			num += 1
 		print("\n\rProcessing completed.")
-		
+	
+	#prints out statistics after the dictionary is created
 	def statistics(self):
 		d = {}
 		for t_n in self.dictionary.values():
@@ -33,7 +43,8 @@ class SemcorDictionaryBuilder:
 			d[t_n] += 1
 		for x in sorted(d.keys(),reverse=True):
 			print(str(x)+"\t"+str(d[x]))
-
+	
+	#saves the dictionary to a json file
 	def save(self,filename):
 		try:
 			f = open(filename,"w")
@@ -42,7 +53,8 @@ class SemcorDictionaryBuilder:
 			print("Saving successful")
 		except:
 			print("Error while saving")
-		
+	
+	#reads a dictionary out of a file for adding sentences or showing statistics
 	def read(self,filename):
 		try:
 			f = open(filename,"r")
@@ -51,26 +63,33 @@ class SemcorDictionaryBuilder:
 			print("Reading successful")
 		except:
 			print("Error while saving")
-
+	
+	#ui for read
 	def loadDictionary(self):
 		filename = raw_input("Path to load the dictionary from: ")
 		self.read(filename)
 	
+	#ui for save
 	def saveDictionary(self):
 		filename = raw_input("Path to save the dictionary into: ")
 		self.save(filename)
 		
+	#returns the corpus
 	def returnSemcor(self):
 		return self.semcor
 		
+	#returns the sentence with the given id
 	def returnSentence(self,id):
 		try:
 			return self.semcor[id]
 		except:
 			raise IndexError('Sentence with the specified id unknown.')
+			
+	#returns the dictionary
 	def returnDictionary(self):
 		return self.dictionary
 		
+	#processes a sentence and gives out a list of verb synsets in this sentence
 	def getOccuringSynsets(self,sentence):
 		synsets = []
 		for chunk in sentence:
@@ -80,6 +99,7 @@ class SemcorDictionaryBuilder:
 						synsets += [chunk.label().synset().name()]
 		return sorted(synsets)
 		
+	#takes a list of synsets and builds cooccurence pairs to add them to the dictionary
 	def addSentenceToDictionary(self,synsets):
 		num_sets = len(synsets)
 		for x in range(num_sets): #last element does not have to be called, because it has no partner
