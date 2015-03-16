@@ -32,5 +32,5 @@ class Evaluation():
     
 
 if __name__ == "__main__":
-    e = Evaluation("goldbuilder/goldstandard.json", "train_data_calculated_3.json")
+    e = Evaluation("goldbuilder/goldstandard.json", "train_data_calculated.json")
     print(e.calcCongruence())
