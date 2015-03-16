@@ -18,27 +18,82 @@ von Tremper & Frank erforschten "Semantic Relations Data Set" zur Verfügung.
 Annahmen: 
 1. Zwei Verb(-senses) die in einer Relation zueinander stehen, haben eine höhere Kookurrenz und einen höheren Lesk-Wert als
 Verb(-senses) ohne Kookurrenz.
-2. Die Art der Relation ist irrelevant in Bezug auf die Kookurrenz.
+2. Die Troponyme zweier Verben stehen in der selben Relation zueinander wie ihre Verben.
+3. Eine Relation induziert immer ein bestimmtes Sensepaar.
+4. Die Art der Relation ist irrelevant in Bezug auf die Kookurrenz.
 
 Wie bei Tremper & Frank und in den 20. Vorlesungsfolien soll eine korpusbasierte WSD weiterhelfen.
 Die Korpora SemCor und OntoNotes dienen zunächst als Quelle, um Kookurrenz der Verbpaare und deren Senses zu zählen.
-Nachdem alle möglichen Verb-Sense-Kombinationen(VSK) gebildet und deren Auftauchen im Korpus summiert wurden,
-werden die Kontextassoziations-Wahrscheinlichkeiten der VSK berechnet, orientiert an Jurafsky & Martin,
-und der Lesk-Algorithmus für das Vergleichen von Verb-Glossen wird initialisiert. 
-Zu diesen Werten fügen wir noch die Kookurrenz der Troponyme der VSK hinzu, um mehr Daten in die Disambiguierung einzubeziehen.
-Dem liegt die Annahme zu Grunde, dass die Troponyme von Verben in der gleichen Relation zueinander stehen wie eben diese Verben.
+Die gewählten Korpora sind mit Lemmata annotiert. Da Senses eine homomorphe Abbildung von Lemmata auf Senses sind, also jedem Sense
+mehrere Lemmata aber jedem Lemma nur ein Sense zugeordnet werden kann, untersuchen wir wenn wir wenn wir die Lemmata in Senses
+übersetzen automatisch die Synonyme der Lemmata also der Verbpaare.
+Es wurden zwei Algorithmen geschrieben, die aus den Korpora die Kookurrenz in ihrer Häufigkeit extrahieren und zu einem 
+.json-File zusammenfügen und in der Datei all_verbs.json speichern:
+
+Ausschnitt:
+_________________________________________________________________
+{"develop.v.19,lie.v.06": 2, "get_rid_of.v.01,trace.v.01": 2, "contain.v.05,lose.v.08": 3, "develop.v.19,lie.v.02": 2, 
+"get_rid_of.v.01,trace.v.05": 1, "develop.v.19,lie.v.01": 2, "contain.v.05,lose.v.02": 3, "bring.v.01,erupt.v.01": 2}
+_________________________________________________________________
+
+Die Datei verb_ontologization.py, bzw. die Klasse OntologyWSD liest nun dieses File ein und enthält Methoden um Features zu berechnen.
+Als Features wurde zunächst ausschließlich ein Assoziationsmaß zwischen den Senses gewählt. Beim ersten Blick wurde aber schon klar dass dies
+zu keinem guten Ergebnis führen kann. Deshalb wurde Lesk als Feature hinzugefügt. Die Evaluation nach den folgenden Schritten hat
+außerdem gezeigt dass unter der 2. Annahme ein schlechteres Ergebnis erzielt wird als wenn die Nullhypothese angenommen wird.
+Deshalb wurde als drittes Feature die Relation gewählt.
+Ein Algorithmus kalkuliert nun für alle Sensepaare die für die Verbpaare aus dem Goldstandard möglich sind die Featurevektoren und
+gibt ein Label -/+ an. + umfasst alle Vektoren die laut Goldstandard korrekt sind, - alle anderen.
+
+Die Datei weka.py ruft die Klasse auf und übersetzt die erhaltenen Informationen in eine .arff Datei die von WeKa lesbar ist.
+
+Ausschnitt:
+_________________________________________________________________
+@RELATION ontolo_new_trop
+
+@ATTRIBUTE cooc NUMERIC
+@ATTRIBUTE lesk NUMERIC
+@ATTRIBUTE relation {"ant","tmp","ent","pre"}
+@ATTRIBUTE correct {"+","-"}
+
+
+@DATA
+0.03993288590604027,1,ent,-
+0,0,ent,-
+0.016129032258064516,0,pre,-
+0,0,ant,-
+0.32589285714285715,1,ent,-
+0,0,ant,-
+0.012307692307692308,0,pre,-
+0,1,ant,-
+0,0,ant,-
+0,0,ant,-
+0,1,tmp,-
+1.0,3,tmp,+
+1.0,3,tmp,+
+1.0,3,tmp,+
+1.0,3,tmp,+
+1.0,3,tmp,+
+1.0,3,tmp,+
+1.0,3,tmp,+
+...
+_________________________________________________________________
+
+Das Assoziationsmaß ("cooc") wurde berechnet indem die Kookurrenz der Sensepaare und derer Troponyme durch die Kookurrenz 
+aller Sensepaare relativiert wurde, die einen der beiden Senses und einen anderen Sense der für das andere Verb möglich ist enthalten.
+Dieses Vorgehen orientiert sich an Jurafsky & Martin. Der Einbezug der Troponyme fußt auf Annahme 2..
+
+Lesk ("lesk") wird berechnet indem die Zahl der gemeinsamen Wörter in den WordNet-Beschreibungen berechnet wurde.
 
 Mit diesen Ergebnissen klassifiziert nun das Data-Mining-Programm Weka unsere Sensepaare mithilfe des 
-Simple Logistic Algorithm.
+Simple Logistic Algorithm. Leider ist das erhaltene Verhältnis von + und - Label zu groß. Deshalb haben wir positiv gelabelten Vektoren 
+vervielfältigt.
+
 Das aus "Grundlagen der Statistik" und "Machine Learning" bekannte Verfahren der Klassifikation, 
 das auch Tremper & Frank zur Annotation ihres oben erwähnten Data-Sets anwenden, wird von Weka automatisch vollzogen. Die Feature-Gewichtungen, 
 die Weka bestimmt, sind für die finale Auswahl der Senses notwendig und werden in einen Algorithmus übernommen,
 der die Senses anhand der Features "predicted".
 
-Die Datenpunkte werden in die Klassen +/- unterteilt. Die + Klasse umfasst die, laut Goldstandard, korrekten Sensepaare, die - Klasse 
-die für das Verbpaar inkorrekten Sensepaare.
-
-Mit diesen Methoden bzw. diesem Vorgehen kalkulieren wir (theoretisch) das wahrscheinlichste Sense-Paar zweier Verben in 
+Mit der Klasse Chooser (chooseSense.py) kalkulieren wir das (theoretisch) wahrscheinlichste Sense-Paar zweier Verben in 
 ihrer Relation. Hierzu wird für ein Verbpaar der Featurevektor berechnet und mithilfe der Gewichtungen ein Wert berechnet. 
 Es wird das Sensepaar gewählt, das den maximalen Wert erreicht, weil es am weitesten von der - Klasse entfernt ist, also
 am wahrscheinlichsten für das Verbpaar.
@@ -58,8 +113,7 @@ Completely correctly predicted Pairs: 3
 Partially correctly predicted Pairs: 10
 
 Beide Werte zeugen von einem schlechten Ergebnis. Offensichtlich lässt sich der Sense zweier Verben anhand ihrer Relation nicht
-einfach durch die gewählten Features bestimmen, bzw. nicht auf die gewählte Methode.
-
+einfach durch die gewählten Features bestimmen, bzw. nicht durch die gewählte Methode.
 
 Erkenntnisse
 ------------
