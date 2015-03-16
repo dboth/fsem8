@@ -54,8 +54,8 @@ Congruence: 0.20512820512820512
 Completely correctly predicted Pairs: 3
 Partially correctly predicted Pairs: 10
 
-Beide Werte zeugen von einem schlechten Ergebnis. Offensichtlich lässt sich der Sense von zwei Verben anhand ihrer Relation nicht
-einfach anhand der gewählten Features bestimmen, bzw. nicht auf die gewählte Methode.
+Beide Werte zeugen von einem schlechten Ergebnis. Offensichtlich lässt sich der Sense zweier Verben anhand ihrer Relation nicht
+einfach durch die gewählten Features bestimmen, bzw. nicht auf die gewählte Methode.
 
 
 Erkenntnisse
@@ -71,6 +71,6 @@ Zusätzliche Maße (wordnet path distance, wordnet antonyms etc.) und das Hinzuz
 Verbkookurrenz, könnten in einem nächsten Schritt umgesetzt werden.
 
 Auch die Wahl von Clustering mit den Relationen als Klassen anstatt der Klassifikation könnte ein besseres Ergebnis liefern.
-Im aktuellen Verfahren wählt Weka Gewichtungen so, dass hinsichtlich der richtigen +/- Labelung optimiert wurde. da aber mehrere
+Im aktuellen Verfahren wählt Weka Gewichtungen so, dass hinsichtlich der richtigen +/- Labelung optimiert wurde. Da aber mehrere
 Sensepaare das + Label erhalten können, wurde das Paar mit dem höchsten Wert gewählt. Hiernach wurde die Gewichtung jedoch nicht optimiert.
 Andere Optimierungs- und Klassifizierungs- bzw. Clusteringverfahren könnten bessere Ergebnisse erzielen. 
