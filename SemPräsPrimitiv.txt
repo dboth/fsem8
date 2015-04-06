@@ -1,0 +1,149 @@
+FOLIE 1
+
+Algorithmus zur Ontologisierung Semantischer Relationen
+Formale Semantik, WiSe 14/15, A. Frank
+Dominik Both, Svenja Lohse, Tonio Weidler
+
+
+
+
+
+FOLIE 2
+
+/F Überblick:
+
+1. Ziel
+2. Vorgehen
+3. Ressourcen
+4. Programme
+5. Evaluation
+6. Erkenntnisse/ Probleme
+7. Literatur
+
+
+
+
+
+FOLIE 3
+
+/F 1. Ziel:
+
+- Automatische Auswahl der wahrscheinlichsten Senses für Verb-Relations-Paare
+
+
+
+
+
+FOLIE 4
+
+/F 2. Vorgehen:
+
+- Goldstandardermittlung
+
+- korpusbasierte WSD:
+-- Korpusassoziationsmaße
+-- Lesk
+-- Relation
+
+- Weka:
+-- automatische Klassifikation
+
+- erwünschtes Endergebnis:
+-- Kalkulation der wahrscheinlichsten Sensepaare
+
+
+
+
+
+FOLIE 5
+
+/F 3. Ressourcen
+
+- WordNet
+- Semantic Relations Data Set (Tremper/Frank)
+- SemCor
+- OntoNotes
+- Weka
+
+
+
+
+
+FOLIE 6
+
+/F 4. Programm
+/F Preprocessing:
+
+- Gold Standard Annotator
+- Gold Standard Generator
+- Semcor Verb Cooccurence Extractor
+- Ontonotes Verb Cooccurence Extractor
+- Verb Cooccurence Extractor Merger
+
+
+
+
+
+FOLIE 7
+
+/F 4. Programm
+/F Main Algorithm:
+
+- Verb Ontologization Main Class
+-- calculation main class for the relation ontologization algorithm
+
+- Weka ARFF Builder
+-- processes the data processed by the verb ontologization main class into a ARFF-file readable by WEKA
+
+- ARFF Data Multiplicator
+-- helper file, multiplying the positive datapoints by a given value to get an equal proportion
+
+- Verb Ontologization Sense Chooser
+-- calculates the most probable sense pair for given test data using the calculations in the verbontologization main class
+
+- Verb Ontologization Evaluator
+-- evaluates the calculations of the sense chooser on a given gold standard
+
+
+
+
+FOLIE 8
+
+/F 5. Evaluation
+
+- Bestimmte Kongruenzwert: 
+-- 7.6923076923076925
+
+- Anteil einzelner richtig gewählter Senses:
+-- Congruence: 0.20512820512820512
+-- Completely correctly predicted Pairs: 3
+-- Partially correctly predicted Pairs: 10
+
+
+
+FOLIE 9
+
+/F 6. Erkenntnisse/ Probleme
+
+- ambige Sensepaare pro Verbrelationspaar
+- keine ausreichenden Maße
+- weitere Korpora hinzuziehen
+- Clustering?
+
+
+
+
+FOLIE 10
+
+/F 7. Literatur
+
+- http://www.cl.uni-heidelberg.de/publications/papers/tremper_frank.pdf 
+--- Korpusassoziation, Klassifikation, Semantic Relations Data Set
+
+- Mark Hall, Eibe Frank, Geoffrey Holmes, Bernhard Pfahringer, Peter Reutemann, Ian H. Witten (2009); The WEKA Data Mining Software: An Update; SIGKDD Explorations, Volume 11, Issue 1. 
+--- Weka-Benutzung
+
+- Daniel Jurafsky & James H.Martin (2008); Speech and Language Processing; Prentice Hall, Auflage: 2nd edition. 
+--- Lesk, WSD, Kontextassoziation
+
+- Semantikfolien 15-20
